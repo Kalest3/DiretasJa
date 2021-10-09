@@ -176,6 +176,17 @@ class Ui_DiretasJa(object):
         self.creditosTexto.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.creditosTexto.setObjectName("textBrowser9")
         self.creditosTexto.setStyleSheet("color: rgb(255, 255, 255);")
+        self.Widgets = [
+            self.diretasLabel, self.manifestacaoImg, self.indiretasb, self.contextob,
+            self.motivacaob, self.primeirasb, self.apiceb, self.resolucaob, self.creditosb,
+            self.voltarb, self.liderancasb, self.fontesb, self.indiretasTitulo, self.indiretasTexto,
+            self.contextoTitulo, self.contextoTexto, self.danteImg, self.motivacaoTitulo, self.motivacaoTexto,
+            self.primeirasTitulo, self.primeirasTexto, self.liderancasTitulo, self.liderancasTexto, self.apiceTitulo,
+            self.apiceTexto, self.resolucaoTitulo, self.resolucaoTexto, self.fontesTitulo, self.fontesTexto,
+            self.creditosTitulo, self.creditosTexto
+        ]
+        self.telaPrincipalWidgets = []
+        self.WidgetsExternas = []
         self.indiretasb.clicked.connect(self.indiretas)
         self.motivacaob.clicked.connect(self.motivacao)
         self.primeirasb.clicked.connect(self.primeiras)
@@ -206,6 +217,11 @@ class Ui_DiretasJa(object):
         self.fontesTitulo.hide()
         self.creditosTexto.hide()
         self.creditosTitulo.hide()
+        for widget in self.Widgets:
+            if not widget.isHidden():
+                self.telaPrincipalWidgets.append(widget)
+            else:
+                self.WidgetsExternas.append(widget)
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(DiretasJa)
 
@@ -369,37 +385,10 @@ class Ui_DiretasJa(object):
         self.creditosTexto.show()
         self.retranslateUicreditos()
     def voltar(self):
-        self.indiretasTitulo.hide()
-        self.indiretasTexto.hide()
-        self.danteImg.hide()
-        self.contextoTexto.hide()
-        self.contextoTitulo.hide()
-        self.motivacaoTexto.hide()
-        self.motivacaoTitulo.hide()
-        self.primeirasTitulo.hide()
-        self.primeirasTexto.hide()
-        self.liderancasTitulo.hide()
-        self.liderancasTexto.hide()
-        self.apiceTitulo.hide()
-        self.apiceTexto.hide()
-        self.resolucaoTitulo.hide()
-        self.resolucaoTexto.hide()
-        self.fontesTitulo.hide()
-        self.fontesTexto.hide()
-        self.creditosTitulo.hide()
-        self.creditosTexto.hide()
-        self.diretasLabel.show()
-        self.manifestacaoImg.show()
-        self.indiretasb.show()
-        self.motivacaob.show()
-        self.primeirasb.show()
-        self.apiceb.show()
-        self.resolucaob.show()
-        self.creditosb.show()
-        self.voltarb.hide()
-        self.contextob.show()
-        self.liderancasb.show()
-        self.fontesb.show()
+        for widget in self.telaPrincipalWidgets:
+            widget.show()
+        for widget in self.WidgetsExternas:
+            widget.hide()
     def retranslateUiindiretas(self):
         _translate = QtCore.QCoreApplication.translate
         self.voltarb.setText(_translate("DiretasJa", "VOLTAR", None))
